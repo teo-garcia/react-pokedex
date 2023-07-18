@@ -7,7 +7,7 @@ export type PokeListProps = {
   filters: Array<string>
 }
 
-const limit = 64
+const limit = 10
 
 const getPokemons = ({ pageParam = 0 }): Promise<PokemonResponse> => {
   return fetch(
