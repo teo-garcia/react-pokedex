@@ -19,6 +19,7 @@ const ThemeSwitch = () => {
   }, [theme, nextTheme])
 
   const handleClick = () => {
+    alert('You got me, it is not ready yet')
     setTheme(nextTheme)
   }
 

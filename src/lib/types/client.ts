@@ -51,3 +51,9 @@ export type Pokemon = {
   figure: string
   type: string
 }
+
+export type UsePokemonResult = {
+  isLoading: boolean
+  isError: boolean
+  data: PokemonRichInfo[]
+}

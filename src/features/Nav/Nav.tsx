@@ -4,10 +4,10 @@ import pokeball from '../../assets/pokeball.svg'
 
 const Nav = () => {
   return (
-    <nav className="h-[72px] w-full bg-blue-500 flex items-center px-4 justify-between md:px-4 lg:p-4">
+    <nav className="flex h-[72px] w-full items-center justify-between bg-slate-950 px-4 md:px-4 lg:p-4">
       <div className="flex items-center gap-x-1">
-        <img className="w-12 h-12 lg:w-14 lg:h-14" alt="" src={pokeball} />
-        <h1 className="text-white font-semibold text-3xl hover:underline lg:text-4xl">
+        <img className="h-12 w-12 lg:h-14 lg:w-14" alt="" src={pokeball} />
+        <h1 className="text-3xl font-semibold text-white hover:underline lg:text-4xl">
           Poket
         </h1>
       </div>

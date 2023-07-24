@@ -16,12 +16,12 @@
       "@components/*": ["components/*"],
       "@features/*": ["features/*"],
       "@lib/*": ["lib/*"],
-      "@pages/*": ["pages/*"],
+      "@pages/*": ["pages/*"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext",
+    "target": "ESNext"
   },
   "include": ["src"],
   "references": [

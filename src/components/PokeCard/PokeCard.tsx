@@ -1,56 +1,27 @@
-import type {
-  Pokemon,
-  PokemonBasicInfo,
-  PokemonRichInfo,
-} from '@lib/types/client'
-import { useQuery } from '@tanstack/react-query'
+import type { Pokemon } from '@lib/types/client'
 
-export type PokeCardProps = PokemonBasicInfo
-
-const fetchPokemon = (url: string) => {
-  return fetch(url)
-    .then((response) => response.json())
-    .then((data) => data)
-}
+export type PokeCardProps = Pokemon
 
 const PokeCard = (props: PokeCardProps) => {
-  const { name, url } = props
-  const { data, isLoading, error } = useQuery<PokemonRichInfo>({
-    queryKey: [name, url],
-    queryFn: () => fetchPokemon(url),
-  })
-
-  if (isLoading || !data || error) return null
-
-  const pokemon = getPokemonCardData(data)
+  const { name, figure, type } = props
 
   return (
-    <li className="py-4 h-56 w-48 border border-slate-400 rounded-lg relative bg-gradient-to-b from-blue-500 to-blue-700 animate-fade">
+    <li className="relative h-48 w-40 animate-fade rounded-lg border border-slate-400 bg-gradient-to-b from-slate-800 to-slate-950 py-4 md:h-56 md:w-48">
       <img
-        className="w-9/12 absolute left-2/4 top-2 -translate-x-1/2"
+        className="absolute left-2/4 top-2 w-8/12 -translate-x-1/2 md:w-8/12"
         alt=""
-        src={pokemon.figure}
+        src={figure}
       />
-      <div className="h-full flex flex-col justify-end gap-y-1">
-        <p className="text-center capitalize text-xl font-bold text-white">
+      <div className="flex h-full flex-col justify-end gap-y-1">
+        <p className="text-center text-xl font-bold capitalize text-white">
           {name}
         </p>
-        <p className="text-center capitalize text-sm underline text-white">
-          {pokemon.type}
+        <p className="text-center text-sm capitalize text-white underline">
+          {type}
         </p>
       </div>
     </li>
   )
-}
-
-const getPokemonCardData = (data: PokemonRichInfo): Pokemon => {
-  const { id, name, sprites, types } = data
-  return {
-    id,
-    name,
-    figure: sprites.other['official-artwork']['front_shiny'],
-    type: types[0].type.name,
-  }
 }
 
 export { PokeCard }

@@ -1,58 +1,54 @@
-import { PokemonResponse } from '@lib/types/client'
-import { useQuery } from '@tanstack/react-query'
+import type { PokemonResponse } from '@lib/types/client'
 import clsx from 'clsx'
-import { ChangeEvent, useState } from 'react'
-
-const getPokemonTypes = (): Promise<PokemonResponse> => {
-  return fetch('https://pokeapi.co/api/v2/type')
-    .then((res) => res.json())
-    .then((res) => res)
-}
+import { pokemonAPI } from '@lib/tools/pokemon'
+import { useQuery } from '@tanstack/react-query'
+import type { ChangeEvent } from 'react'
 
 export type PokeFilterProps = {
-  onChange: (evt: ChangeEvent<HTMLInputElement>) => void
-  filters: Array<string>
+  handleFilterChange: (evt: ChangeEvent<HTMLInputElement>) => void
+  activeFilter: string
 }
 
 const PokeFilter = (props: PokeFilterProps) => {
-  const { filters, onChange } = props
+  const { activeFilter, handleFilterChange } = props
   const { data, isLoading, isError } = useQuery<PokemonResponse>({
     queryKey: ['filters'],
-    queryFn: getPokemonTypes,
+    queryFn: pokemonAPI.getPokemonTypes,
   })
 
   if (isLoading || isError) return null
 
-  const types = data.results
+  const types = [{ name: 'all' }, ...data.results]
 
   return (
-    <ul className="pt-12 flex flex-wrap justify-center w-10/12 md:w-8/12 xl:w-5/12 gap-3 mx-auto">
-      {types.map((type) => {
-        const isActive = filters.includes(type.name)
-        return (
-          <li key={type.name}>
+    <section className="mx-auto flex flex-col gap-y-4 ">
+      <h2 className="text-3xl font-bold lg:text-2xl">Filter:</h2>
+      <form className="flex flex-wrap gap-2 md:gap-y-3">
+        {types.map((type) => {
+          const isActive = type.name === activeFilter
+          return (
             <label
+              key={type.name}
               className={clsx(
-                'bg-blue-500 rounded-lg py-1 px-2 capitalize text-white font-bold cursor-pointer',
+                'cursor-pointer rounded-lg bg-slate-950 px-2 py-1 text-sm font-bold capitalize text-white md:text-base',
                 {
-                  ['bg-blue-800']: isActive,
+                  ['border border-black bg-slate-50 text-black']: isActive,
                 }
               )}
             >
-              {type.name}
               <input
-                className="invisible w-0 h-0"
-                type="checkbox"
+                className="invisible h-0 w-0"
+                type="radio"
                 name={type.name}
-                defaultChecked={type.name === 'normal'}
                 checked={isActive}
-                onChange={onChange}
+                onChange={handleFilterChange}
               />
+              {type.name}
             </label>
-          </li>
-        )
-      })}
-    </ul>
+          )
+        })}
+      </form>
+    </section>
   )
 }
 
