@@ -109,12 +109,23 @@ const pokemonUtils = {
   },
   mapPokemons: (results: Array<PokemonRichInfo>): Array<Pokemon> => {
     return results.map((pokemon) => {
-      const { id, name, sprites, types } = pokemon
+      const { id, name, sprites, types, stats } = pokemon
       return {
         id,
         name,
         figure: sprites.other['official-artwork']['front_shiny'],
         type: types[0].type.name,
+        stats: stats
+          .map((stat) => ({
+            name: stat.stat.name,
+            value: stat.base_stat,
+          }))
+          .filter(
+            (stat) =>
+              !['speed', 'special-attack', 'special-defense'].includes(
+                stat.name
+              )
+          ),
       }
     })
   },

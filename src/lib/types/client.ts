@@ -43,6 +43,17 @@ export type PokemonRichInfo = {
       name: string
     }
   }>
+  stats: Array<{
+    base_stat: number
+    stat: {
+      name: 'hp' | 'attack' | 'defense' | 'speed'
+    }
+  }>
+}
+
+export type PokemonStat = {
+  name: 'hp' | 'attack' | 'defense' | 'speed'
+  value: number
 }
 
 export type Pokemon = {
@@ -50,6 +61,7 @@ export type Pokemon = {
   id: number
   figure: string
   type: string
+  stats: Array<PokemonStat>
 }
 
 export type UsePokemonResult = {
