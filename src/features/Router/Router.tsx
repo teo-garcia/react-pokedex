@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from '@pages/index'
 import NotFoundPage from '@pages/404'
+import PokemonPage from '@pages/pokemon'
 
 const homePage = {
   path: '/',
@@ -11,7 +12,12 @@ const notFoundPage = {
   element: <NotFoundPage />,
 }
 
-const routes = [homePage, notFoundPage]
+const pokemonPage = {
+  path: 'pokemon/:name',
+  element: <PokemonPage />,
+}
+
+const routes = [homePage, pokemonPage, notFoundPage]
 const router = createBrowserRouter(routes)
 
 export type RouterProps = {

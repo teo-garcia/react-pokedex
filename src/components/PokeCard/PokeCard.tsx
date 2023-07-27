@@ -16,7 +16,7 @@ const StatIconsMap = {
 const PokeCard = (props: PokeCardProps) => {
   const { name, figure, type, stats } = props
   return (
-    <li className="from relative h-48 w-40 animate-fade rounded-lg border border-slate-400 bg-gradient-to-b from-blue-500 to-blue-700 px-4 py-2 shadow-xl transition-transform hover:scale-95 md:h-56 md:w-48">
+    <li className="from relative h-48 w-40 animate-fade rounded-lg border border-slate-400 bg-gradient-to-b from-blue-500 to-blue-900 px-4 py-2 shadow-xl transition-transform hover:scale-95 dark:border-slate-500 dark:shadow-slate-900 md:h-56 md:w-48">
       <img
         className="absolute left-2/4 top-2 w-8/12 -translate-x-1/2 md:w-8/12"
         alt=""
