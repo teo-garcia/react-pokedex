@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from '@pages/index'
 import NotFoundPage from '@pages/404'
 import PokemonPage from '@pages/pokemon'
+import { Layout } from '@components/Layout/Layout'
 
 const homePage = {
   path: '/',
@@ -17,15 +18,16 @@ const pokemonPage = {
   element: <PokemonPage />,
 }
 
-const routes = [homePage, pokemonPage, notFoundPage]
-const router = createBrowserRouter(routes)
-
-export type RouterProps = {
-  children?: React.ReactNode
+const layout = {
+  element: <Layout />,
+  children: [homePage, notFoundPage, pokemonPage],
 }
 
-const Router = (props: RouterProps) => {
-  return <RouterProvider router={router} {...props} />
+const routes = [layout]
+const router = createBrowserRouter(routes)
+
+const Router = () => {
+  return <RouterProvider router={router} />
 }
 
 export { Router }

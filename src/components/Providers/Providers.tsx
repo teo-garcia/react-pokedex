@@ -12,7 +12,6 @@ const Providers = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <Nav />
         <Router />
       </HelmetProvider>
       {isDEV && <ReactQueryDevtools />}
