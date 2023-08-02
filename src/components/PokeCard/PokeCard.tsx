@@ -6,7 +6,7 @@ import { BiSolidCategory } from 'react-icons/bi'
 
 export type PokeCardProps = Pokemon
 
-const StatIconsMap = {
+export const StatIconsMap = {
   hp: AiFillHeart,
   attack: PiSwordFill,
   defense: BsShieldFillPlus,

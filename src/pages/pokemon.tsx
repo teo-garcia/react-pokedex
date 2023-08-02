@@ -1,4 +1,5 @@
 import { Seo } from '@components/Seo/Seo'
+import { PokeDetail } from '@features/PokeDetail/PokeDetail'
 import { useParams } from 'react-router-dom'
 
 const PokemonPage = () => {
@@ -7,6 +8,7 @@ const PokemonPage = () => {
   return (
     <>
       <Seo title={`Pokedex | ${capitalizedName}`} />
+      <PokeDetail name={name} />
     </>
   )
 }

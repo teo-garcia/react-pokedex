@@ -49,6 +49,16 @@ export type PokemonRichInfo = {
       name: 'hp' | 'attack' | 'defense' | 'speed'
     }
   }>
+  moves: Array<{
+    move: {
+      name: string
+    }
+  }>
+  abilities: Array<{
+    ability: {
+      name: string
+    }
+  }>
 }
 
 export type PokemonStat = {
@@ -62,10 +72,12 @@ export type Pokemon = {
   figure: string
   type: string
   stats: Array<PokemonStat>
+  moves: Array<string>
+  abilities: Array<string>
 }
 
 export type UsePokemonResult = {
   isLoading: boolean
   isError: boolean
-  data: PokemonRichInfo[]
+  data: Array<Pokemon>
 }

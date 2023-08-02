@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react'
-import { Nav } from './Nav'
+import { PokeDetail } from './PokeDetail'
 
-describe('<Nav /> tests', () => {
+describe('<PokeDetail /> tests', () => {
   test('It should render', () => {
-    // render(<Nav />)
+    render(<PokeDetail />)
     expect(1 + 1).toBe(2)
   })
 })

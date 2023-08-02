@@ -1,4 +1,4 @@
-import {
+import type {
   Pokemon,
   PokemonResponse,
   PokemonRichInfo,
@@ -8,9 +8,9 @@ import type {
   QueryFunctionContext,
   UseQueryResult,
 } from '@tanstack/react-query'
-import { useInfiniteQuery, useQueries } from '@tanstack/react-query'
+import { useInfiniteQuery, useQueries, useQuery } from '@tanstack/react-query'
 
-const BASE_LIMIT = 128
+const BASE_LIMIT = 64
 const PAGINATED_LIMIT = 32
 
 const usePokemonsQuery = () => {
@@ -35,14 +35,24 @@ const usePokemonsQuery = () => {
   })
 
   const { isLoading, isError, data } = pokemonUtils.joinPokemonQueries(resultB)
-  const finalData = pokemonUtils.mapPokemons(data)
   return {
     isLoading,
     isError,
-    data: finalData,
+    data,
     isFetchingNextPage: resultA.isFetchingNextPage,
     fetchNextPage: resultA.fetchNextPage,
   }
+}
+
+const usePokemonQuery = (name: string) => {
+  const { isLoading, isError, data } = useQuery<PokemonRichInfo>({
+    queryFn: pokemonAPI.getPokemon,
+    queryKey: ['pokemon', name],
+  })
+
+  const mappedData = data ? pokemonUtils.mapPokemon(data) : undefined
+
+  return { isLoading, isError, data: mappedData }
 }
 
 const pokemonAPI = {
@@ -102,33 +112,47 @@ const pokemonUtils = {
         return
       }
 
-      joinedResults.data.push(currentResult?.data as PokemonRichInfo)
+      joinedResults.data.push(
+        pokemonUtils.mapPokemon(currentResult?.data as PokemonRichInfo)
+      )
     })
 
     return joinedResults
   },
-  mapPokemons: (results: Array<PokemonRichInfo>): Array<Pokemon> => {
-    return results.map((pokemon) => {
-      const { id, name, sprites, types, stats } = pokemon
-      return {
-        id,
-        name,
-        figure: sprites.other['official-artwork']['front_shiny'],
-        type: types[0].type.name,
-        stats: stats
-          .map((stat) => ({
-            name: stat.stat.name,
-            value: stat.base_stat,
-          }))
-          .filter(
-            (stat) =>
-              !['speed', 'special-attack', 'special-defense'].includes(
-                stat.name
-              )
-          ),
-      }
-    })
+  mapPokemon: (pokemon: PokemonRichInfo): Pokemon => {
+    const {
+      id,
+      name,
+      sprites,
+      types,
+      stats: rawStats,
+      moves: rawMoves,
+      abilities: rawAbilities,
+    } = pokemon || {}
+
+    const stats = rawStats
+      .map((stat) => ({
+        name: stat.stat.name,
+        value: stat.base_stat,
+      }))
+      .filter(
+        (stat) =>
+          !['speed', 'special-attack', 'special-defense'].includes(stat.name)
+      )
+
+    const moves = rawMoves.map((move) => move.move.name).slice(0, 12)
+    const abilities = rawAbilities.map((ability) => ability.ability.name)
+
+    return {
+      id,
+      name,
+      figure: sprites.other['official-artwork']['front_shiny'],
+      type: types[0].type.name,
+      stats,
+      moves,
+      abilities,
+    }
   },
 }
 
-export { pokemonUtils, pokemonAPI, usePokemonsQuery }
+export { pokemonUtils, pokemonAPI, usePokemonsQuery, usePokemonQuery }
