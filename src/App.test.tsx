@@ -1,9 +1,9 @@
-import { render } from '@testing-library/react'
 import { App } from './App'
+import { customRender } from '@lib/tools/customRender'
 
 describe('<App /> tests', () => {
   it('Should render without crashing', () => {
-    render(<App />)
+    customRender(<App />)
     expect(true).toBe(true)
   })
 })

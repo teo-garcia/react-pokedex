@@ -1,9 +1,9 @@
-// import { render } from '@testing-library/react'
-// import { PokeDetail } from './PokeDetail'
+import { PokeDetail } from './PokeDetail'
+import { customRender } from '@lib/tools/customRender'
 
 describe('<PokeDetail /> tests', () => {
   test('It should render', () => {
-    // render(<PokeDetail />)
+    customRender(<PokeDetail name="pikachu" />)
     expect(1 + 1).toBe(2)
   })
 })

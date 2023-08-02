@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from '@pages/index'
 import NotFoundPage from '@pages/404'
@@ -26,8 +27,12 @@ const layout = {
 const routes = [layout]
 const router = createBrowserRouter(routes)
 
-const Router = () => {
-  return <RouterProvider router={router} />
+export type RouterProps = {
+  children?: ReactNode
+}
+
+const Router = (props: RouterProps) => {
+  return <RouterProvider router={router} {...props} />
 }
 
 export { Router }
