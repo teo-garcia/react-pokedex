@@ -1,11 +1,7 @@
-![README.md banner](./README.png)
+![Package License](https://img.shields.io/github/license/teo-garcia/react-pokedex)
+![Package Version](https://img.shields.io/github/package-json/v/teo-garcia/react-pokedex)
 
-![Package License](https://img.shields.io/github/license/teo-garcia/react-template-vite)
-![Package Version](https://img.shields.io/github/package-json/v/teo-garcia/react-template-vite)
-
-# React Template Vite
-
-A faster way to start using React with Typescript.
+# React Pokedex
 
 ## Requirements
 
@@ -15,10 +11,10 @@ A faster way to start using React with Typescript.
 
 ## Installation
 
-1. Copy the repo or use the `gh` tool:
+1. Clone the repo:
 
 ```bash
-  gh repo create my-project --private --clone --template teo-garcia/react-template-vite
+  git clone https:/github.com/teo-garcia/react-template-vite
 ```
 
 2. Install the dependencies:
