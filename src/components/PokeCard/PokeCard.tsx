@@ -19,7 +19,7 @@ const PokeCard = (props: PokeCardProps) => {
     <li className="from relative h-48 w-40 animate-fade rounded-lg border border-slate-400 bg-gradient-to-b from-blue-500 to-blue-900 px-4 py-2 shadow-xl transition-transform hover:scale-95 dark:border-slate-500 dark:shadow-slate-900 md:h-56 md:w-48">
       <img
         className="absolute left-2/4 top-2 w-8/12 -translate-x-1/2 md:w-8/12"
-        alt=""
+        alt={name}
         src={figure}
       />
       <div className="flex h-full flex-col justify-end gap-y-1">
@@ -39,7 +39,7 @@ const PokeCard = (props: PokeCardProps) => {
                   key={stat.name}
                   className="flex items-center gap-x-0.5 text-sm text-white"
                 >
-                  <Icon />
+                  <Icon data-testid={stat.name} />
                   <p>{stat.value}</p>
                 </li>
               )

@@ -41,7 +41,7 @@ const PokeList = (props: PokeListProps) => {
                 {pokemons.length}
               </span>
             </span>
-            <ul className="align-center items-between mb-12 mt-4 grid w-full grid-cols-2 justify-items-center gap-y-6 md:grid-cols-3 md:gap-y-8 xl:grid-cols-[repeat(5,_190px)] xl:justify-between xl:gap-x-0">
+            <ul className="align-center items-between mb-12 mt-4 grid w-full grid-cols-2 justify-items-center gap-y-6 md:grid-cols-3 md:gap-y-8 xl:grid-cols-[repeat(4,_190px)] xl:justify-between xl:gap-x-0">
               {pokemons.map((pokemon) => (
                 <Link
                   key={pokemon.name}
