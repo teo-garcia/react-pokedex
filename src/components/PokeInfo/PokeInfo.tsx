@@ -32,7 +32,7 @@ const PokeInfo = (props: PokeInfoProps) => {
                 key={stat.name}
                 className="flex items-center gap-x-1 text-xl md:text-2xl"
               >
-                <Icon className="text-blue-500" />
+                <Icon data-testid={stat.name} className="text-blue-500" />
                 <p className="font-bold dark:text-white">{stat.value}</p>
               </li>
             )

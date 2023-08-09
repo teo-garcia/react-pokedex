@@ -1,9 +1,11 @@
-// import { render } from '@testing-library/react'
-// import { PokePreview } from './PokePreview'
+import { render, screen } from '@testing-library/react'
+import { PokePreview } from './PokePreview'
+import { pokemonMock } from '../../mocks/pokemonMock'
 
 describe('<PokePreview /> tests', () => {
-  test('It should render', () => {
-    // render(<PokePreview />)
-    expect(1 + 1).toBe(2)
+  test('It should render pokemon name', () => {
+    render(<PokePreview pokemon={pokemonMock} />)
+    expect(screen.getByText(pokemonMock.name)).toBeInTheDocument()
+    expect(screen.getByAltText(pokemonMock.name)).toBeInTheDocument()
   })
 })
