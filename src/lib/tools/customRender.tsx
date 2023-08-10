@@ -3,7 +3,7 @@ import { type RenderOptions } from '@testing-library/react'
 import { render } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { HelmetProvider } from 'react-helmet-async'
-import { Router } from '@features/Router/Router'
+import { MemoryRouter } from 'react-router-dom'
 
 const queryClient = new QueryClient()
 
@@ -16,7 +16,7 @@ const ProvidersWrapper = (props: ProvidersWrapperProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <Router>{children}</Router>
+        <MemoryRouter>{children}</MemoryRouter>
       </HelmetProvider>
     </QueryClientProvider>
   )

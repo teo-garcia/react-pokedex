@@ -14,7 +14,7 @@
 1. Clone the repo:
 
 ```bash
-  git clone https:/github.com/teo-garcia/react-template-vite
+  git clone https:/github.com/teo-garcia/react-template-vite.git
 ```
 
 2. Install the dependencies:
